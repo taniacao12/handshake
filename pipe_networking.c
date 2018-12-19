@@ -65,7 +65,7 @@ int client_handshake(int *to_server) {
     // receive server message
     char msg[HANDSHAKE_BUFFER_SIZE];
     int r = read(receive, msg, HANDSHAKE_BUFFER_SIZE);
-    printf("RECIEVED MESSAGE FROM SERVER\SERVER MESSAGE: %s\n", msg);
+    printf("RECIEVED MESSAGE FROM SERVER\nSERVER MESSAGE: %s\n", msg);
     // remove private FIFO
     remove(pipe_name);
     printf("REMOVED PRIVATE PIPE\n");
