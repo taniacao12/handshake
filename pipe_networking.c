@@ -13,7 +13,7 @@ int server_handshake(int *to_client) {
     // create well known pipe
     int wkp = mkfifo("main", 0644);
     if (wkp == - 1) // errno message
-        printf("-------------------------\nERROR: %d --> %s\n-------------------------\n", errno, strerror(errno));
+        printf("ERROR: %d --> %s\n", errno, strerror(errno));
     else printf("CREATED WELL KNOWN PIPE\n");
     // wait
     int receive = open("main", O_RDONLY);
@@ -54,11 +54,11 @@ int client_handshake(int *to_server) {
     // set to_server to well known pipe
     *to_server = open("main", O_WRONLY);
     if (*to_server == - 1) // errno message
-        printf("-------------------------\nERROR: %d --> %s\n-------------------------\n", errno, strerror(errno));
+        printf("ERROR: %d --> %s\n", errno, strerror(errno));
     // send private FIFO to server
     int w = write(*to_server, pipe_name, HANDSHAKE_BUFFER_SIZE);
     if (w == - 1) // errno message
-        printf("-------------------------\nERROR: %d --> %s\n-------------------------\n", errno, strerror(errno));
+        printf("ERROR: %d --> %s\n", errno, strerror(errno));
     else printf("SENT PRIVATE PIPE TO SERVER\n");
     // wait for response
     int receive = open(pipe_name, O_RDONLY);
